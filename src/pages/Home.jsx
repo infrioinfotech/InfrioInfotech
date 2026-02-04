@@ -154,16 +154,16 @@ const Home = () => {
             <Link to="/portfolio" className="btn-primary px-8 py-3 text-sm">View Full Portfolio</Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {portfolioImages.slice(0, 8).map((item, index) => (
-              <PortfolioCard 
-                key={item.id} 
-                {...item} 
-                index={index} 
-                className={index === 4 && portfolioImages.length === 6 ? "md:col-start-2" : ""} 
-              />
-            ))}
-          </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              {portfolioImages.slice(0, 6).map((item, index) => (
+                <div key={item.id} className="w-[calc(50%-8px)] md:w-[calc(25%-12px)]">
+                  <PortfolioCard 
+                    {...item} 
+                    index={index} 
+                  />
+                </div>
+              ))}
+            </div>
         </div>
       </section>
 

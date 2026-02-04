@@ -48,23 +48,23 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Portfolio Grid */}
-      <section className="py-24 text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
-              <AnimatePresence>
-                {filteredImages.map((item, index) => (
-                  <PortfolioCard 
-                    key={item.id} 
-                    {...item} 
-                    index={index} 
-                    className={index === 4 && filteredImages.length === 6 ? "lg:col-start-2" : ""} 
-                  />
-                ))}
-              </AnimatePresence>
-            </motion.div>
-        </div>
-      </section>
+        {/* Portfolio Grid */}
+        <section className="py-24 text-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div layout className="flex flex-wrap justify-center gap-4">
+                <AnimatePresence>
+                  {filteredImages.map((item, index) => (
+                    <div key={item.id} className="w-[calc(50%-8px)] md:w-[calc(33.333%-11px)] lg:w-[calc(25%-12px)]">
+                      <PortfolioCard 
+                        {...item} 
+                        index={index} 
+                      />
+                    </div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+          </div>
+        </section>
     </div>
   );
 };

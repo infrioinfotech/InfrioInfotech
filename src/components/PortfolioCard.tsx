@@ -17,7 +17,7 @@ export function PortfolioCard({ title, category, image, index }: PortfolioCardPr
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group relative overflow-hidden rounded-2xl bg-gray-100 aspect-square"
+      className="group relative overflow-hidden rounded-2xl bg-gray-100 aspect-1:5"
     >
       <Image
         src={image}
