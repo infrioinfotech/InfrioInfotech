@@ -1,0 +1,174 @@
+import { Palette, Layout, FileText, Video, Globe, Smartphone, Server, Database, Cloud, Code, CheckCircle, Monitor, Shield } from "lucide-react";
+
+export const services = [
+  {
+    id: 1,
+    title: "Web Development",
+    description: "Modern websites built with passion using React, Next.js, and Node.js. We focus on creating clean, responsive, and functional web experiences.",
+    icon: Globe,
+  },
+  {
+    id: 2,
+    title: "Software Solutions",
+    description: "Efficient software tools tailored to solve real problems. From simple management systems to automation scripts, we build what you need.",
+    icon: Code,
+  },
+  {
+    id: 3,
+    title: "App Development",
+    description: "User-friendly mobile apps for Android and iOS. We apply our learning to build functional and engaging mobile experiences.",
+    icon: Smartphone,
+  },
+  {
+    id: 4,
+    title: "UI/UX Design",
+    description: "Clean and intuitive designs. We focus on usability and simplicity to ensure users can navigate your product with ease.",
+    icon: Layout,
+  },
+  {
+    id: 5,
+    title: "Cloud Basics",
+    description: "Helping you get started with cloud hosting. We assist with deployment and basic infrastructure on platforms like AWS and Vercel.",
+    icon: Cloud,
+  },
+  {
+    id: 6,
+    title: "Tech Consulting",
+    description: "Honest technology advice for your ideas. We help you choose the right tools and stack for your specific project needs.",
+    icon: Server,
+  },
+];
+
+export const portfolioImages = [
+  {
+    id: 1,
+    title: "E-commerce Concept",
+    category: "Web Development",
+    image: "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 2,
+    title: "Inventory System Demo",
+    category: "Software Solutions",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 3,
+    title: "Fitness App Prototype",
+    category: "Mobile App",
+    image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 4,
+    title: "Website Redesign Project",
+    category: "Web Design",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 5,
+    title: "Cloud Setup Demo",
+    category: "Cloud Services",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 6,
+    title: "Banking App Concept",
+    category: "UI/UX Design",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+  },
+];
+
+export const pricingPackages = [
+  {
+    id: 1,
+    name: "Starter",
+    price: "499",
+    description: "Perfect for personal projects and small startups getting started.",
+    includes: ["Basic Website", "Hosting Setup"],
+    features: [
+      "Custom 5-Page Website",
+      "Mobile Responsive Design",
+      "Basic SEO Setup",
+      "Contact Form Integration",
+      "1 Month Support",
+    ],
+  },
+  {
+    id: 2,
+    name: "Business",
+    price: "999",
+    description: "Great for growing businesses needing dynamic features.",
+    includes: ["Dynamic Website", "CMS Integration", "SEO Basic"],
+    features: [
+      "Dynamic Web Application",
+      "Content Management System",
+      "Standard SEO Setup",
+      "Social Media Links",
+      "3 Months Support",
+      "Performance Tuning",
+    ],
+    popular: true,
+  },
+  {
+    id: 3,
+    name: "Custom",
+    price: "1999",
+    description: "Tailored solutions for specific business requirements.",
+    includes: ["E-commerce", "Custom Logic", "Admin Dashboard"],
+    features: [
+      "Custom Software Development",
+      "Cloud Deployment",
+      "API Integration",
+      "Security Best Practices",
+      "6 Months Support",
+      "Direct Developer Access",
+    ],
+  },
+];
+
+export const testimonials = [
+  {
+    id: 1,
+    name: "Rahul Mehta",
+    role: "Early Client",
+    content: "Infrio Infotech helped me build a portfolio website that looks professional. They were very responsive and open to feedback.",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    id: 2,
+    name: "Anjali Gupta",
+    role: "Project Collaborator",
+    content: "Working with the team on a college project was a great experience. Their coding skills and problem-solving abilities are impressive.",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    id: 3,
+    name: "David Smith",
+    role: "Freelance Client",
+    content: "I needed a simple inventory tool and they delivered exactly what I asked for. Great value for the price and very honest team.",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+  },
+];
+
+export const whyChooseUs = [
+  {
+    title: "Passionate Team",
+    description: "We are a team of dedicated learners and developers who put heart into every line of code.",
+    icon: "Users",
+  },
+  {
+    title: "Custom Approach",
+    description: "We treat every project as a unique opportunity to create something special and tailored to you.",
+    icon: "Settings",
+  },
+  {
+    title: "Reliable Support",
+    description: "We are always available to help you with updates, fixes, and questions about your project.",
+    icon: "Clock",
+  },
+  {
+    title: "Learning & Growth",
+    description: "We constantly upgrade our skills to bring you the latest and most efficient technology solutions.",
+    icon: "Award",
+  },
+];

@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-white text-brand-black font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Primary Button: White bg, Black text, Red border */
+    .btn-primary {
+      @apply bg-brand-white border-2 border-brand-red text-brand-black font-bold py-3 px-8 rounded-none transition-all duration-300 transform active:scale-95 hover:scale-105 hover:text-brand-red;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-primary:hover {
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1), 0 0 20px rgba(225, 6, 0, 0.1);
+    }
+  
+  /* Secondary Button: Transparent bg, Black text, Red underline on hover */
+  .btn-outline {
+    @apply border-b-2 border-transparent text-brand-black font-bold py-3 px-8 transition-all duration-300 hover:border-brand-red hover:text-brand-red;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-black mb-6 text-brand-black;
+  }
+
+  .accent-text {
+    @apply text-brand-red;
+  }
+
+    .card {
+      @apply bg-brand-white border border-gray-100 p-6 rounded-none transition-all duration-300;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card:hover {
+      @apply border-brand-red/30;
+    }
+}
+
+/* Custom Scrollbar - Light Theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #F9F9F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D1D5DB;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(225, 6, 0, 0.5);
+}
