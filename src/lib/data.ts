@@ -134,6 +134,7 @@ export const portfolioImages = [
     category: "Security System",
     description: "A smart, cloud-based visitor management and society security system for residential societies and gated communities. Features digital visitor entry, real-time approval notifications, and centralized admin dashboard.",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=800&fit=crop",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
   },
   {
     id: 2,
@@ -141,6 +142,7 @@ export const portfolioImages = [
     category: "Event Management",
     description: "Smart Seminar & Event Management System - A full-stack web application to digitize and automate seminar and academic event management in educational institutions with real-time data management.",
     image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=800&fit=crop",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
   },
   {
     id: 3,
@@ -148,6 +150,7 @@ export const portfolioImages = [
     category: "Restaurant Software",
     description: "QR-based restaurant management software for cafes and restaurants. Customers scan QR at tables to order and pay online, streamlining the entire dining experience.",
     image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=800&fit=crop",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
   },
   {
     id: 4,
@@ -155,6 +158,7 @@ export const portfolioImages = [
     category: "AI Solutions",
     description: "AI-powered automated interview system that helps HR and companies screen candidates in the first round efficiently, saving time and resources in the recruitment process.",
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=800&fit=crop",
+    technologies: ["Python", "TensorFlow", "React", "FastAPI"],
   },
   {
     id: 5,
@@ -162,6 +166,7 @@ export const portfolioImages = [
     category: "AI Solutions",
     description: "Intelligent resume parsing system that automatically extracts and analyzes candidate information, helping HR teams quickly identify the best candidates from large applicant pools.",
     image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=800&fit=crop",
+    technologies: ["Python", "NLP", "React", "Node.js"],
   },
   {
     id: 6,
@@ -169,6 +174,7 @@ export const portfolioImages = [
     category: "Inventory Management",
     description: "A perfect inventory management application for small shops like Pan Parlours in India. Track stock levels, get low-stock alerts, discover nearby wholesalers, and order directly from the dashboard.",
     image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&h=800&fit=crop",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
   },
 ];
 

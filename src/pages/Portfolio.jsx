@@ -51,10 +51,10 @@ const Portfolio = () => {
         {/* Portfolio Grid */}
         <section className="py-24 text-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div layout className="flex flex-wrap justify-center gap-4">
+              <motion.div layout className="flex flex-col gap-8">
                 <AnimatePresence>
                   {filteredImages.map((item, index) => (
-                    <div key={item.id} className="w-[calc(50%-8px)] md:w-[calc(33.333%-11px)] lg:w-[calc(25%-12px)]">
+                    <div key={item.id} className="w-full">
                       <PortfolioCard 
                         {...item} 
                         index={index} 

@@ -222,13 +222,15 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {portfolioImages.slice(0, 8).map((item, index) => (
+          <div className="flex flex-col gap-12">
+            {portfolioImages.slice(0, 5).map((item, index) => (
               <PortfolioCard
                 key={item.id}
                 title={item.title}
                 category={item.category}
+                description={item.description}
                 image={item.image}
+                technologies={item.technologies}
                 index={index}
               />
             ))}

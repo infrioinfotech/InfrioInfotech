@@ -69,14 +69,16 @@ export default function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             layout
-            className="flex flex-wrap justify-center -m-3"
+            className="flex flex-col gap-8"
           >
             {filteredImages.map((item, index) => (
-              <div key={item.id} className="p-3 w-1/2 md:w-1/3 lg:w-1/4">
+              <div key={item.id} className="w-full">
                 <PortfolioCard
                   title={item.title}
                   category={item.category}
+                  description={item.description}
                   image={item.image}
+                  technologies={item.technologies}
                   index={index}
                 />
               </div>

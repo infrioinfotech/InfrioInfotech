@@ -154,9 +154,9 @@ const Home = () => {
             <Link to="/portfolio" className="btn-primary px-8 py-3 text-sm">View Full Portfolio</Link>
           </div>
 
-            <div className="flex flex-wrap justify-center gap-4">
-              {portfolioImages.slice(0, 6).map((item, index) => (
-                <div key={item.id} className="w-[calc(50%-8px)] md:w-[calc(25%-12px)]">
+            <div className="flex flex-col gap-8">
+              {portfolioImages.slice(0, 3).map((item, index) => (
+                <div key={item.id} className="w-full">
                   <PortfolioCard 
                     {...item} 
                     index={index} 
