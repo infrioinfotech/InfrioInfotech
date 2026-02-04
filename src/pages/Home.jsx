@@ -156,7 +156,12 @@ const Home = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {portfolioImages.slice(0, 8).map((item, index) => (
-              <PortfolioCard key={item.id} {...item} index={index} />
+              <PortfolioCard 
+                key={item.id} 
+                {...item} 
+                index={index} 
+                className={index === 4 && portfolioImages.length === 6 ? "md:col-start-2" : ""} 
+              />
             ))}
           </div>
         </div>

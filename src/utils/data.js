@@ -38,45 +38,89 @@ export const services = [
     icon: Server,
   },
 ];
-
 export const portfolioImages = [
   {
     id: 1,
-    title: "E-commerce Concept",
-    category: "Web Development",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    title: "VisitSafe",
+    category: "Security System",
+    description: "A smart, cloud-based visitor management and society security system for residential societies and gated communities. Features digital visitor entry, real-time approval notifications, and centralized admin dashboard.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=800&fit=crop",
   },
   {
     id: 2,
-    title: "Inventory System Demo",
-    category: "Software Solutions",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    title: "SSEMS",
+    category: "Event Management",
+    description: "Smart Seminar & Event Management System - A full-stack web application to digitize and automate seminar and academic event management in educational institutions with real-time data management.",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=800&fit=crop",
   },
   {
     id: 3,
-    title: "Fitness App Prototype",
-    category: "Mobile App",
-    image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    title: "DineEasy",
+    category: "Restaurant Software",
+    description: "QR-based restaurant management software for cafes and restaurants. Customers scan QR at tables to order and pay online, streamlining the entire dining experience.",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=800&fit=crop",
   },
   {
     id: 4,
-    title: "Website Redesign Project",
-    category: "Web Design",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    title: "AI Robotic Interview",
+    category: "AI Solutions",
+    description: "AI-powered automated interview system that helps HR and companies screen candidates in the first round efficiently, saving time and resources in the recruitment process.",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=800&fit=crop",
   },
   {
     id: 5,
-    title: "Cloud Setup Demo",
-    category: "Cloud Services",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    title: "AI Resume Parser",
+    category: "AI Solutions",
+    description: "Intelligent resume parsing system that automatically extracts and analyzes candidate information, helping HR teams quickly identify the best candidates from large applicant pools.",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=800&fit=crop",
   },
   {
     id: 6,
-    title: "Banking App Concept",
-    category: "UI/UX Design",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    title: "SmallShopStocker",
+    category: "Inventory Management",
+    description: "A perfect inventory management application for small shops like Pan Parlours in India. Track stock levels, get low-stock alerts, discover nearby wholesalers, and order directly from the dashboard.",
+    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&h=800&fit=crop",
   },
 ];
+
+// export const portfolioImages = [
+//   {
+//     id: 1,
+//     title: "E-commerce Concept",
+//     category: "Web Development",
+//     image: "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+//   },
+//   {
+//     id: 2,
+//     title: "Inventory System Demo",
+//     category: "Software Solutions",
+//     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+//   },
+//   {
+//     id: 3,
+//     title: "Fitness App Prototype",
+//     category: "Mobile App",
+//     image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+//   },
+//   {
+//     id: 4,
+//     title: "Website Redesign Project",
+//     category: "Web Design",
+//     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+//   },
+//   {
+//     id: 5,
+//     title: "Cloud Setup Demo",
+//     category: "Cloud Services",
+//     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+//   },
+//   {
+//     id: 6,
+//     title: "Banking App Concept",
+//     category: "UI/UX Design",
+//     image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+//   },
+// ];
 
 export const pricingPackages = [
   {

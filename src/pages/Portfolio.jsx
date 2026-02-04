@@ -14,7 +14,7 @@ const Portfolio = () => {
   return (
     <div className="bg-brand-white pb-24">
       {/* Hero */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden  ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -32,9 +32,9 @@ const Portfolio = () => {
       </section>
 
       {/* Filter */}
-      <section className="py-12 bg-brand-offwhite border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
+      <section className="py-12 bg-brand-offwhite border-y border-gray-100  ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  ">
+          <div className="flex flex-wrap justify-center gap-4 ">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -49,15 +49,20 @@ const Portfolio = () => {
       </section>
 
       {/* Portfolio Grid */}
-      <section className="py-24">
+      <section className="py-24 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <AnimatePresence>
-              {filteredImages.map((item, index) => (
-                <PortfolioCard key={item.id} {...item} index={index} />
-              ))}
-            </AnimatePresence>
-          </motion.div>
+            <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+              <AnimatePresence>
+                {filteredImages.map((item, index) => (
+                  <PortfolioCard 
+                    key={item.id} 
+                    {...item} 
+                    index={index} 
+                    className={index === 4 && filteredImages.length === 6 ? "lg:col-start-2" : ""} 
+                  />
+                ))}
+              </AnimatePresence>
+            </motion.div>
         </div>
       </section>
     </div>

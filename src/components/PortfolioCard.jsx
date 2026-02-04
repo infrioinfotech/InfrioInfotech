@@ -1,14 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const PortfolioCard = ({ title, category, image, index }) => {
+const PortfolioCard = ({ title, category, image, index, className = "" }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
       viewport={{ once: true }}
-      className="group relative overflow-hidden rounded-none aspect-square bg-brand-white border border-gray-100 hover:border-brand-red transition-all duration-300"
+      className={`group relative overflow-hidden rounded-none aspect-square bg-brand-white border border-gray-100 hover:border-brand-red transition-all duration-300 ${className}`}
     >
       <img
         src={image}
