@@ -6,36 +6,42 @@ export const services = [
     title: "Web Development",
     description: "Modern websites built with passion using React, Next.js, and Node.js. We focus on creating clean, responsive, and functional web experiences.",
     icon: Globe,
+    slug: "web-development",
   },
   {
     id: 2,
     title: "Software Solutions",
     description: "Efficient software tools tailored to solve real problems. From simple management systems to automation scripts, we build what you need.",
     icon: Code,
+    slug: "software-solutions",
   },
   {
     id: 3,
     title: "App Development",
     description: "User-friendly mobile apps for Android and iOS. We apply our learning to build functional and engaging mobile experiences.",
     icon: Smartphone,
+    slug: "app-development",
   },
   {
     id: 4,
     title: "UI/UX Design",
     description: "Clean and intuitive designs. We focus on usability and simplicity to ensure users can navigate your product with ease.",
     icon: Layout,
+    slug: "ui-ux-design",
   },
   {
     id: 5,
     title: "Cloud Basics",
     description: "Helping you get started with cloud hosting. We assist with deployment and basic infrastructure on platforms like AWS and Vercel.",
     icon: Cloud,
+    slug: "cloud-basics",
   },
   {
     id: 6,
     title: "Tech Consulting",
     description: "Honest technology advice for your ideas. We help you choose the right tools and stack for your specific project needs.",
     icon: Server,
+    slug: "tech-consulting",
   },
 ];
 export const portfolioImages = [
@@ -176,29 +182,7 @@ export const pricingPackages = [
   },
 ];
 
-export const testimonials = [
-  {
-    id: 1,
-    name: "Rahul Mehta",
-    role: "Early Client",
-    content: "Infrio Infotech helped me build a portfolio website that looks professional. They were very responsive and open to feedback.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-  },
-  {
-    id: 2,
-    name: "Anjali Gupta",
-    role: "Project Collaborator",
-    content: "Working with the team on a college project was a great experience. Their coding skills and problem-solving abilities are impressive.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-  },
-  {
-    id: 3,
-    name: "David Smith",
-    role: "Freelance Client",
-    content: "I needed a simple inventory tool and they delivered exactly what I asked for. Great value for the price and very honest team.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-  },
-];
+export const testimonials = [];
 
 export const whyChooseUs = [
   {

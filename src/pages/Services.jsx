@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { services } from '../utils/data';
 import ServiceCard from '../components/ServiceCard';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   return (

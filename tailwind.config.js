@@ -15,7 +15,8 @@ export default {
         "brand-red-dark": "#BE0500",
       },
       fontFamily: {
-        sans: ["Inter", "Poppins", "sans-serif"],
+        sans: ["Share Tech", "system-ui", "sans-serif"],
+        sharetech: ["Share Tech", "system-ui", "sans-serif"],
       },
       boxShadow: {
         'premium': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',

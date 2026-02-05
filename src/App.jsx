@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
 import Pricing from './pages/Pricing';
 import Portfolio from './pages/Portfolio';
 import Testimonials from './pages/Testimonials';
@@ -20,6 +21,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="services" element={<Services />} />
+          <Route path="services/:slug" element={<ServiceDetail />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="portfolio" element={<Portfolio />} />
           <Route path="testimonials" element={<Testimonials />} />

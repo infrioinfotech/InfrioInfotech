@@ -2,10 +2,20 @@ import { google } from 'googleapis';
 
 const getAuth = () => {
   const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  let privateKey = process.env.GOOGLE_PRIVATE_KEY;
 
   if (!clientEmail || !privateKey) {
     throw new Error('Google Sheets credentials missing');
+  }
+
+  // Handle literal \n characters (common in JSON dumps)
+  privateKey = privateKey.replace(/\\n/g, '\n');
+
+  // Handle single-line keys (common in .env files without proper escaping)
+  if (!privateKey.includes('\n') && privateKey.includes('-----BEGIN PRIVATE KEY-----')) {
+    privateKey = privateKey
+      .replace('-----BEGIN PRIVATE KEY-----', '-----BEGIN PRIVATE KEY-----\n')
+      .replace('-----END PRIVATE KEY-----', '\n-----END PRIVATE KEY-----');
   }
 
   const auth = new google.auth.GoogleAuth({
@@ -89,6 +99,18 @@ export const appendToSheet = async (target, values) => {
         } catch (createError) {
              // If creation fails (e.g. name exists), use 'Orders'
              sheetName = 'Orders';
+        }
+      }
+    } else if (target === 'Reviews') {
+      try {
+        sheetName = await getSheetTitleByIndex(sheets, spreadsheetId, 2);
+      } catch (e) {
+        // Index 2 missing. Create 'Reviews' sheet.
+        console.log('Third sheet not found, creating "Reviews" sheet...');
+        try {
+            sheetName = await createSheet(sheets, spreadsheetId, 'Reviews');
+        } catch (createError) {
+             sheetName = 'Reviews';
         }
       }
     } else {

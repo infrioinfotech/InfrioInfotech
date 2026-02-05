@@ -84,7 +84,7 @@ const Home = () => {
                 <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-brand-red/20 -mr-2 -mt-2" />
                 <div className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 border-brand-red/20 -ml-2 -mb-2" />
                 <img
-                  src="/infrio/final-logo.png"
+                  src="/infrio/InfruiLogo.png"
                   alt="Infrio Infotech Logo"
                   className="w-full h-full object-contain grayscale-2 hover:grayscale transition-all duration-700"
                 />

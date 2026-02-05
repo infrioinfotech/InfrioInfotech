@@ -89,6 +89,9 @@ const Order = () => {
               <div className="card border-brand-red ring-1 ring-brand-red/10 relative overflow-hidden">
                 <Package className="mb-6 text-brand-red" size={32} />
                 <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-black/40 mb-2">Selected Package</h4>
+                {selectedPkg.service && (
+                  <div className="text-sm text-brand-gray mb-2">Service: <span className="font-bold text-brand-black">{selectedPkg.service}</span></div>
+                )}
                 <h3 className="text-3xl font-black text-brand-black mb-4">{selectedPkg.name}</h3>
                 <div className="text-4xl font-black text-brand-black mb-8">₹{selectedPkg.price}</div>
                 <ul className="space-y-3">

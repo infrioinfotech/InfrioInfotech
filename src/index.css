@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,7 +12,7 @@
 @layer components {
   /* Primary Button: White bg, Black text, Red border */
     .btn-primary {
-      @apply bg-brand-white border-2 border-brand-red text-brand-black font-bold py-3 px-8 rounded-none transition-all duration-300 transform active:scale-95 hover:scale-105 hover:text-brand-red;
+      @apply bg-brand-white border-2 border-brand-red text-brand-black font-normal py-3 px-8 rounded-none transition-all duration-300 transform active:scale-95 hover:scale-105 hover:text-brand-red;
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
     }
     
@@ -21,11 +22,11 @@
   
   /* Secondary Button: Transparent bg, Black text, Red underline on hover */
   .btn-outline {
-    @apply border-b-2 border-transparent text-brand-black font-bold py-3 px-8 transition-all duration-300 hover:border-brand-red hover:text-brand-red;
+    @apply border-b-2 border-transparent text-brand-black font-normal py-3 px-8 transition-all duration-300 hover:border-brand-red hover:text-brand-red;
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-black mb-6 text-brand-black;
+    @apply text-4xl md:text-5xl font-normal mb-6 text-brand-black;
   }
 
   .accent-text {
@@ -59,3 +60,22 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(225, 6, 0, 0.5);
 }
+
+/* Infinite Horizontal Scroll Animation (Left -> Right) */
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-horizontal {
+  animation: scroll-horizontal 60s linear infinite;
+}
+
+.animate-scroll-horizontal:hover {
+  animation-play-state: paused;
+}
+
