@@ -178,29 +178,7 @@ export const portfolioImages = [
   },
 ];
 
-export const testimonials = [
-  {
-    id: 1,
-    name: "Rajesh Kumar",
-    company: "Tech Solutions Pvt Ltd",
-    content: "Infrio Infotech delivered an exceptional website that perfectly represents our brand. The turnaround time was impressive!",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Priya Sharma",
-    company: "Boutique Fashion",
-    content: "Amazing work on our complete branding package. Very professional and creative team!",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Amit Patel",
-    company: "Food Junction",
-    content: "The festival posters have been a huge hit on our social media. Great value for money!",
-    rating: 5,
-  },
-];
+export const testimonials = [];
 
 export const whyChooseUs = [
   {

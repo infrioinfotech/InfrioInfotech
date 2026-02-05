@@ -64,15 +64,15 @@
 /* Infinite Horizontal Scroll Animation (Left -> Right) */
 @keyframes scroll-horizontal {
   0% {
-    transform: translateX(-20%);
+    transform: translateX(-80%);
   }
   100% {
-    transform: translateX(80%);
+    transform: translateX(140%);
   }
 }
 
 .animate-scroll-horizontal {
-  animation: scroll-horizontal 3s linear infinite;
+  animation: scroll-horizontal 5s linear infinite;
 }
 
 .animate-scroll-horizontal:hover {

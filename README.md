@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Firebase Storage CORS Configuration
 
-## Getting Started
+To allow image uploads from your deployed site, you must configure CORS for your Firebase Storage bucket.
 
-First, run the development server:
+### Option 1: Using Google Cloud Shell (Recommended - No Installation)
+1.  Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2.  Click the **Activate Cloud Shell** icon (terminal icon in the top right toolbar).
+3.  In the Cloud Shell terminal, create the cors configuration file:
+    ```bash
+    nano cors.json
+    ```
+4.  Paste the following content into the editor:
+    ```json
+    [
+      {
+        "origin": ["https://infrioinfotech.qzz.io", "http://localhost:5173", "http://localhost:5000"],
+        "method": ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
+        "maxAgeSeconds": 3600
+      }
+    ]
+    ```
+5.  Save and exit (Press `Ctrl+O`, `Enter`, then `Ctrl+X`).
+6.  Run the command to set CORS (replace `your-bucket-name` with your actual bucket name, e.g., `infrio-infotech.appspot.com`):
+    ```bash
+    gsutil cors set cors.json gs://infrio-infotech.appspot.com
+    ```
+    *Note: You can find your exact bucket URL in the Firebase Console > Storage section.*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Troubleshooting: Bucket Not Found
+If you see a `NotFoundException` or "404 The specified bucket does not exist" error, it means the bucket name is incorrect.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1.  **List your actual buckets** by running this command in Cloud Shell:
+    ```bash
+    gsutil ls
+    ```
+2.  You will see output like `gs://some-name.appspot.com/`.
+3.  **Copy that name** and use it in the CORS command:
+    ```bash
+    gsutil cors set cors.json gs://YOUR_ACTUAL_BUCKET_NAME
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Option 2: Using Local CLI
+If you have `gsutil` installed locally:
+1.  Open your terminal in this project folder.
+2.  Run:
+    ```bash
+    gsutil cors set cors.json gs://infrio-infotech.appspot.com
+    ```

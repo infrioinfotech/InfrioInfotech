@@ -33,13 +33,11 @@ const withTimeout = (promise, ms) => {
 export const submitReview = async (req, res) => {
   try {
     // Expect JSON payload with photoUrl already uploaded
-    let { name, message, rating, photoUrl } = req.body;
+    let { name, message, rating, photoUrl, reviewText } = req.body;
 
-    // Handle case where frontend sends 'content' instead of 'message' or vice versa
-    // The prompt says "Must accept: name, message, rating, photoUrl"
-    // The frontend currently sends 'content'. I will align frontend to send 'message' as per prompt, 
-    // but handle 'content' here just in case.
-    const reviewMessage = message || req.body.content;
+    // Handle case where frontend sends 'content' or 'reviewText' instead of 'message'
+    // The prompt says "Must accept: name, rating, reviewText, photoURL"
+    const reviewMessage = message || reviewText || req.body.content;
 
     if (!name || !reviewMessage || !rating) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -83,11 +81,11 @@ export const submitReview = async (req, res) => {
       // Give Google Sheets 4 seconds max, otherwise proceed
       await withTimeout(appendToSheet('Reviews', [
         [
-          new Date().toISOString(),
           cleanName,
           ratingNum,
           cleanMessage,
-          photoUrl || ''
+          photoUrl || '',
+          new Date().toISOString()
         ]
       ]), 4000);
     } catch (sheetError) {
