@@ -22,6 +22,14 @@ export const getReviews = async (req, res) => {
   }
 };
 
+// Helper to timeout a promise
+const withTimeout = (promise, ms) => {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Operation timed out')), ms))
+  ]);
+};
+
 export const submitReview = async (req, res) => {
   try {
     // Expect JSON payload with photoUrl already uploaded
@@ -72,7 +80,8 @@ export const submitReview = async (req, res) => {
 
     // 2. Append row to Google Sheet (Optional but good to have)
     try {
-      await appendToSheet('Reviews', [
+      // Give Google Sheets 4 seconds max, otherwise proceed
+      await withTimeout(appendToSheet('Reviews', [
         [
           new Date().toISOString(),
           cleanName,
@@ -80,9 +89,9 @@ export const submitReview = async (req, res) => {
           cleanMessage,
           photoUrl || ''
         ]
-      ]);
+      ]), 4000);
     } catch (sheetError) {
-      console.error('Error appending to Google Sheet:', sheetError);
+      console.error('Warning: Google Sheet append failed or timed out:', sheetError.message);
       // Do not fail the request if sheet fails
     }
 
