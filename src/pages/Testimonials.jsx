@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote, X, Upload, Loader2, User } from 'lucide-react';
 import axios from 'axios';
+import { storage } from '../lib/firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
@@ -77,20 +79,25 @@ const Testimonials = () => {
     setIsSubmitting(true);
 
     try {
-      const formData = new FormData();
-      formData.append('name', newReview.name);
-      formData.append('content', newReview.content);
-      formData.append('rating', newReview.rating);
-      formData.append('photo', photo);
+      // 1. Upload image to Firebase Storage first
+      let photoUrl = '';
+      if (photo) {
+        const storageRef = ref(storage, `reviews/${Date.now()}_${photo.name}`);
+        const snapshot = await uploadBytes(storageRef, photo);
+        photoUrl = await getDownloadURL(snapshot.ref);
+      }
 
-      const response = await axios.post('/api/reviews', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      // 2. Send JSON payload to backend
+      const response = await axios.post('/api/reviews', {
+        name: newReview.name,
+        message: newReview.content, // Matching the backend's expected field
+        rating: newReview.rating,
+        photoUrl: photoUrl
       });
 
       // Update UI immediately with returned review
-      setReviews((prev) => [response.data, ...prev]);
+      const reviewToAdd = response.data.review || response.data;
+      setReviews((prev) => [reviewToAdd, ...prev]);
       
       // Reset and close
       setIsModalOpen(false);
@@ -162,13 +169,13 @@ const Testimonials = () => {
                         />
                       ))}
                     </div>
-                    <p className="text-brand-gray italic mb-8 leading-relaxed line-clamp-4">"{t.content}"</p>
+                    <p className="text-brand-gray italic mb-8 leading-relaxed line-clamp-4">"{t.message || t.content}"</p>
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-full bg-brand-white border border-gray-100 flex items-center justify-center font-black text-brand-red text-lg overflow-hidden shrink-0">
-                        {t.image ? (
-                          <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
+                        {(t.photoUrl || t.image) ? (
+                          <img src={t.photoUrl || t.image} alt={t.name} className="w-full h-full object-cover" />
                         ) : (
-                          t.name[0]
+                          <span className="uppercase">{t.name[0]}</span>
                         )}
                       </div>
                       <div>
@@ -195,13 +202,13 @@ const Testimonials = () => {
                         />
                       ))}
                     </div>
-                    <p className="text-brand-gray italic mb-8 leading-relaxed line-clamp-4">"{t.content}"</p>
+                    <p className="text-brand-gray italic mb-8 leading-relaxed line-clamp-4">"{t.message || t.content}"</p>
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-full bg-brand-white border border-gray-100 flex items-center justify-center font-black text-brand-red text-lg overflow-hidden shrink-0">
-                        {t.image ? (
-                          <img src={t.image} alt={t.name} className="w-full h-full object-cover" />
+                        {(t.photoUrl || t.image) ? (
+                          <img src={t.photoUrl || t.image} alt={t.name} className="w-full h-full object-cover" />
                         ) : (
-                          t.name[0]
+                          <span className="uppercase">{t.name[0]}</span>
                         )}
                       </div>
                       <div>

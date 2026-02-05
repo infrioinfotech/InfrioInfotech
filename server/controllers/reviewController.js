@@ -1,18 +1,20 @@
 import { db } from '../services/firebase.js';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import admin, { bucket, adminDb } from '../services/firebaseAdmin.js';
+import { collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'firebase/firestore';
 import { appendToSheet } from '../services/googleSheetsService.js';
 
 export const getReviews = async (req, res) => {
   try {
     const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
-    const reviews = querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-      // Convert Timestamp to date string if needed, or let frontend handle it
-      createdAt: doc.data().createdAt?.toDate() || new Date()
-    }));
+    const reviews = querySnapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        // Handle Firestore timestamp safely
+        createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : (data.createdAt || new Date())
+      };
+    });
     res.json(reviews);
   } catch (error) {
     console.error('Error fetching reviews:', error);
@@ -22,18 +24,24 @@ export const getReviews = async (req, res) => {
 
 export const submitReview = async (req, res) => {
   try {
-    let { name, content, rating } = req.body;
-    const file = req.file;
+    // Expect JSON payload with photoUrl already uploaded
+    let { name, message, rating, photoUrl } = req.body;
 
-    if (!name || !content || !rating) {
+    // Handle case where frontend sends 'content' instead of 'message' or vice versa
+    // The prompt says "Must accept: name, message, rating, photoUrl"
+    // The frontend currently sends 'content'. I will align frontend to send 'message' as per prompt, 
+    // but handle 'content' here just in case.
+    const reviewMessage = message || req.body.content;
+
+    if (!name || !reviewMessage || !rating) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
     // Validation & Sanitization
-    name = name.trim();
-    content = content.trim();
+    const cleanName = name.trim();
+    const cleanMessage = reviewMessage.trim();
     
-    if (content.length > 500) {
+    if (cleanMessage.length > 500) {
         return res.status(400).json({ error: 'Review content exceeds 500 characters' });
     }
     
@@ -42,67 +50,46 @@ export const submitReview = async (req, res) => {
         return res.status(400).json({ error: 'Rating must be between 1 and 5' });
     }
 
-    let photoUrl = '';
-
-    // 1. Upload image to Firebase Storage (Admin SDK)
-    if (file) {
-      try {
-        const fileName = `reviews/${Date.now()}_${file.originalname}`;
-        const fileUpload = bucket.file(fileName);
-        
-        await fileUpload.save(file.buffer, {
-          metadata: {
-            contentType: file.mimetype,
-          },
-        });
-
-        await fileUpload.makePublic();
-        
-        // Construct public URL
-        photoUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
-      } catch (uploadError) {
-        console.error('Error uploading image:', uploadError);
-        return res.status(500).json({ error: 'Image upload failed' });
-      }
-    }
-
     const reviewData = {
-      name,
-      content,
-      rating: Number(rating),
-      image: photoUrl,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      name: cleanName,
+      message: cleanMessage, // Storing as 'message' to match prompt
+      content: cleanMessage, // Storing as 'content' as well for backward compatibility if needed
+      rating: ratingNum,
+      photoUrl: photoUrl || '',
+      createdAt: serverTimestamp(),
       role: 'Client'
     };
 
-    // 2. Write review to Firestore (Admin SDK)
-    const docRef = await adminDb.collection('reviews').add(reviewData);
+    // 1. Write review to Firestore
+    const docRef = await addDoc(collection(db, 'reviews'), reviewData);
     
     // Prepare response data
     const newReview = {
       id: docRef.id,
       ...reviewData,
-      createdAt: new Date()
+      createdAt: new Date() // Return current time as approximation for immediate UI update
     };
 
-    // 3. Append row to Google Sheet
+    // 2. Append row to Google Sheet (Optional but good to have)
     try {
       await appendToSheet('Reviews', [
         [
           new Date().toISOString(),
-          name,
-          rating,
-          content,
-          photoUrl
+          cleanName,
+          ratingNum,
+          cleanMessage,
+          photoUrl || ''
         ]
       ]);
     } catch (sheetError) {
       console.error('Error appending to Google Sheet:', sheetError);
+      // Do not fail the request if sheet fails
     }
 
-    res.status(201).json(newReview);
+    res.status(201).json({ success: true, review: newReview });
+
   } catch (error) {
-    console.error('Error submitting review:', error);
-    res.status(500).json({ error: 'Failed to submit review' });
+    console.error("Review API error:", error);
+    res.status(500).json({ error: error.message });
   }
 };
