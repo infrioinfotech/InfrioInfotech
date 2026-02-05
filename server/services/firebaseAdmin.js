@@ -34,7 +34,7 @@ if (!admin.apps.length) {
         clientEmail: process.env.GOOGLE_CLIENT_EMAIL,
         privateKey: getPrivateKey(),
       }),
-      storageBucket,
+      // storageBucket, // Storage removed as per instruction
     });
     console.log('Firebase Admin Initialized');
   } catch (error) {
@@ -42,6 +42,6 @@ if (!admin.apps.length) {
   }
 }
 
-export const bucket = admin.storage().bucket();
+// export const bucket = admin.storage().bucket(); // Storage removed
 export const adminDb = admin.firestore();
 export default admin;

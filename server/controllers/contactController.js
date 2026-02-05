@@ -1,6 +1,5 @@
 import { appendToSheet } from '../services/googleSheetsService.js';
-import { db } from '../services/firebase.js';
-import { collection, addDoc } from "firebase/firestore";
+import { adminDb as db } from '../services/firebaseAdmin.js';
 
 export const submitContact = async (req, res) => {
   try {
@@ -10,7 +9,7 @@ export const submitContact = async (req, res) => {
     const pageType = 'contact';
 
     // 1. Save to Firebase
-    await addDoc(collection(db, "contacts"), {
+    await db.collection("contacts").add({
       name,
       email,
       phone,
