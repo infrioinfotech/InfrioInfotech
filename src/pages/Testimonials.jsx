@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote, X, Upload, Loader2, User, Plus } from 'lucide-react';
 import axios from 'axios';
+import avatarPlaceholder from '../assets/avatar-placeholder.png';
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
@@ -19,21 +20,22 @@ const Testimonials = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hoverRating, setHoverRating] = useState(0);
 
+  // Fetch reviews function
+  const fetchReviews = useCallback(async () => {
+    try {
+      const response = await axios.get('/api/reviews');
+      setReviews(response.data);
+    } catch (error) {
+      console.error('Failed to fetch reviews:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   // Fetch reviews on mount
   useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get('/api/reviews');
-        setReviews(response.data);
-      } catch (error) {
-        console.error('Failed to fetch reviews:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchReviews();
-  }, []);
+  }, [fetchReviews]);
 
   // Handle ESC key to close modal
   useEffect(() => {
@@ -111,7 +113,7 @@ const Testimonials = () => {
       }
 
       // 2. Send JSON payload to backend
-      const response = await axios.post('/api/reviews', {
+      await axios.post('/api/reviews', {
         name: newReview.name,
         reviewText: newReview.reviewText, // Backend expects reviewText or message
         message: newReview.reviewText,    // Send both to be safe
@@ -119,9 +121,8 @@ const Testimonials = () => {
         photoUrl: photoUrl
       });
 
-      // Update UI immediately with returned review
-      const reviewToAdd = response.data.review || response.data;
-      setReviews((prev) => [reviewToAdd, ...prev]);
+      // Update UI by refetching
+      await fetchReviews();
       
       // Reset and close
       setIsModalOpen(false);
@@ -183,7 +184,7 @@ const Testimonials = () => {
             <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
             <div className="flex overflow-hidden">
-              <div className="animate-scroll-horizontal flex gap-8 whitespace-nowrap px-4">
+              <div className="animate-scroll-horizontal flex gap-8 whitespace-nowrap px-4 w-max">
                 {/* We double the list to ensure smooth looping */}
                 {[...reviews, ...reviews].map((t, index) => (
                   <div
@@ -211,11 +212,11 @@ const Testimonials = () => {
                     {/* Author */}
                     <div className="flex items-center gap-4 mt-auto">
                       <div className="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
-                        {(t.photoUrl || t.image) ? (
-                          <img src={t.photoUrl || t.image} alt={t.name} className="w-full h-full object-cover" />
-                        ) : (
-                          <span className="font-black text-brand-red text-lg uppercase">{t.name ? t.name[0] : 'A'}</span>
-                        )}
+                        <img 
+                          src={t.photoUrl || t.image || avatarPlaceholder} 
+                          alt={t.name} 
+                          className="w-full h-full object-cover" 
+                        />
                       </div>
                       <div>
                         <h4 className="text-brand-black font-bold text-sm">{t.name}</h4>
