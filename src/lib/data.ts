@@ -128,15 +128,18 @@ export const pricingPackages = [
 ];
 
 export const portfolioImages = [
+
+ 
+
   {
     id: 1,
-    title: "VisitSafe",
-    category: "Security System",
-    description: "A smart, cloud-based visitor management and society security system for residential societies and gated communities. Features digital visitor entry, real-time approval notifications, and centralized admin dashboard.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=800&fit=crop",
-    technologies: ["React", "Node.js", "MongoDB", "Express"],
+    title: "AI Robotic Interview",
+    category: "AI Solutions",
+    description: "AI-powered automated interview system that helps HR and companies screen candidates in the first round efficiently, saving time and resources in the recruitment process.",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=800&fit=crop",
+    technologies: ["Python", "TensorFlow", "React", "FastAPI"],
   },
-  {
+   {
     id: 2,
     title: "SSEMS",
     category: "Event Management",
@@ -144,7 +147,7 @@ export const portfolioImages = [
     image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=800&fit=crop",
     technologies: ["React", "Node.js", "MongoDB", "Express"],
   },
-  {
+    {
     id: 3,
     title: "DineEasy",
     category: "Restaurant Software",
@@ -154,13 +157,12 @@ export const portfolioImages = [
   },
   {
     id: 4,
-    title: "AI Robotic Interview",
-    category: "AI Solutions",
-    description: "AI-powered automated interview system that helps HR and companies screen candidates in the first round efficiently, saving time and resources in the recruitment process.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=800&fit=crop",
-    technologies: ["Python", "TensorFlow", "React", "FastAPI"],
-  },
-  {
+    title: "SmallShopStocker",
+    category: "Inventory Management",
+    description: "A perfect inventory management application for small shops like Pan Parlours in India. Track stock levels, get low-stock alerts, discover nearby wholesalers, and order directly from the dashboard.",
+    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&h=800&fit=crop",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+  },{
     id: 5,
     title: "AI Resume Parser",
     category: "AI Solutions",
@@ -168,14 +170,14 @@ export const portfolioImages = [
     image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=800&fit=crop",
     technologies: ["Python", "NLP", "React", "Node.js"],
   },
-  {
+    {
     id: 6,
-    title: "SmallShopStocker",
-    category: "Inventory Management",
-    description: "A perfect inventory management application for small shops like Pan Parlours in India. Track stock levels, get low-stock alerts, discover nearby wholesalers, and order directly from the dashboard.",
-    image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&h=800&fit=crop",
+    title: "VisitSafe",
+    category: "Security System",
+    description: "A smart, cloud-based visitor management and society security system for residential societies and gated communities. Features digital visitor entry, real-time approval notifications, and centralized admin dashboard.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=800&fit=crop",
     technologies: ["React", "Node.js", "MongoDB", "Express"],
-  },
+  }
 ];
 
 export const testimonials = [];

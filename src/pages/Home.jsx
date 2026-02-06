@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Quote } from 'lucide-react';
-import { services, portfolioImages, testimonials, whyChooseUs } from '../utils/data';
+import { services, bestWorkProjects, testimonials, whyChooseUs } from '../utils/data';
 import ServiceCard from '../components/ServiceCard';
 import PortfolioCard from '../components/PortfolioCard';
 import * as Icons from 'lucide-react';
@@ -143,25 +143,24 @@ const Home = () => {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-24 bg-brand-white">
+      <section className="py-12 bg-brand-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div className="max-w-2xl">
               <span className="text-brand-red font-black text-[10px] uppercase tracking-[0.4em] block mb-4">Portfolio</span>
-              <h2 className="section-title text-brand-black">Recent <span className="text-brand-red underline decoration-brand-red/20 underline-offset-8">Projects</span></h2>
+              <h2 className="section-title text-brand-black">Best <span className="text-brand-red underline decoration-brand-red/20 underline-offset-8">Work From Us</span></h2>
               <p className="text-brand-gray">A collection of our academic, personal, and client projects.</p>
             </div>
             <Link to="/portfolio" className="btn-primary px-8 py-3 text-sm">View Full Portfolio</Link>
           </div>
 
-            <div className="flex flex-col gap-8">
-              {portfolioImages.slice(0, 3).map((item, index) => (
-                <div key={item.id} className="w-full">
-                  <PortfolioCard 
-                    {...item} 
-                    index={index} 
-                  />
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:flex lg:flex-col">
+              {bestWorkProjects.map((item, index) => (
+                <PortfolioCard 
+                  key={item.id}
+                  {...item} 
+                  index={index} 
+                />
               ))}
             </div>
         </div>

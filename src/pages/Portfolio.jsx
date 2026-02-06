@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { portfolioImages } from '../utils/data';
+import { allProjects } from '../utils/data';
 import PortfolioCard from '../components/PortfolioCard';
 
 const Portfolio = () => {
@@ -8,8 +8,8 @@ const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
   const filteredImages = activeCategory === 'All'
-    ? portfolioImages
-    : portfolioImages.filter(img => img.category === activeCategory);
+    ? allProjects
+    : allProjects.filter(img => img.category === activeCategory);
 
   return (
     <div className="bg-brand-white pb-24">
@@ -49,20 +49,17 @@ const Portfolio = () => {
       </section>
 
         {/* Portfolio Grid */}
-        <section className="py-24 text-center">
+        <section className="py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div layout className="flex flex-col gap-8">
-                <AnimatePresence>
-                  {filteredImages.map((item, index) => (
-                    <div key={item.id} className="w-full">
-                      <PortfolioCard 
-                        {...item} 
-                        index={index} 
-                      />
-                    </div>
-                  ))}
-                </AnimatePresence>
-              </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:flex lg:flex-col">
+              {filteredImages.map((item, index) => (
+                <PortfolioCard
+                  key={item.id}
+                  {...item}
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
         </section>
     </div>

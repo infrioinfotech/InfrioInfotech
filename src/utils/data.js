@@ -95,6 +95,54 @@ export const portfolioImages = [
   },
 ];
 
+export const bestWorkProjects = [
+  {
+    id: 1,
+    title: "AI Robotic Interview",
+    category: "AI Solutions",
+    description:
+      "AI-powered automated interview system that helps HR and companies screen candidates in the first round efficiently, saving time and resources in the recruitment process.",
+    image:
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=800&fit=crop",
+    technologies: ["Python", "TensorFlow", "React", "FastAPI"],
+  },
+  {
+    id: 2,
+    title: "SSEMS",
+    category: "Event Management",
+    description:
+      "Smart Seminar & Event Management System - A full-stack web application to digitize and automate seminar and academic event management in educational institutions with real-time data management.",
+    image:
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=800&fit=crop",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+  },
+  {
+    id: 3,
+    title: "DineEasy",
+    category: "Restaurant Software",
+    description:
+      "QR-based restaurant management software for cafes and restaurants. Customers scan QR at tables to order and pay online, streamlining the entire dining experience.",
+    image:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=800&fit=crop",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+  },
+];
+
+export const allProjects = [
+  ...portfolioImages,
+  {
+    id: 7,
+    title: "Medical Payment Reminder",
+    category: "Healthcare Software",
+    description:
+      "Medical Payment Reminder is a lightweight system that helps clinics and hospitals automatically remind patients about pending medical bills and follow-ups through digital notifications.",
+    image:
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=800&fit=crop",
+    technologies: ["Node.js", "Express", "MongoDB", "React"],
+    link: "https://github.com/infrioinfotech/Medical-Payment-Reminder",
+  },
+];
+
 // export const portfolioImages = [
 //   {
 //     id: 1,
