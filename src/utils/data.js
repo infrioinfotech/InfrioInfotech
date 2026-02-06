@@ -126,6 +126,17 @@ export const bestWorkProjects = [
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=800&fit=crop",
     technologies: ["React", "Node.js", "MongoDB", "Express"],
   },
+  {
+    id: 7,
+    title: "Medical Payment Reminder",
+    category: "Healthcare Software",
+    description:
+      "A web-based medical payment reminder system that helps clinics and hospitals automatically notify patients about upcoming and overdue payments.",
+    image:
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=800&fit=crop",
+    technologies: ["Node.js", "Express", "MongoDB", "React"],
+    link: "https://github.com/infrioinfotech/Medical-Payment-Reminder",
+  },
 ];
 
 export const allProjects = [
@@ -135,7 +146,7 @@ export const allProjects = [
     title: "Medical Payment Reminder",
     category: "Healthcare Software",
     description:
-      "Medical Payment Reminder is a lightweight system that helps clinics and hospitals automatically remind patients about pending medical bills and follow-ups through digital notifications.",
+      "A web-based medical payment reminder system that helps clinics and hospitals automatically notify patients about upcoming and overdue payments.",
     image:
       "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=800&fit=crop",
     technologies: ["Node.js", "Express", "MongoDB", "React"],

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import SEO from '../components/SEO';
 import { submitContactForm } from '../services/api';
 
 const Contact = () => {
@@ -67,6 +68,16 @@ const Contact = () => {
 
   return (
     <div className="bg-brand-white pb-24">
+      <SEO
+        title="Contact Infrio Infotech | Start Your Project"
+        description="Contact Infrio Infotech to start your project. Get in touch for IT services, web development and software solutions."
+        canonical="https://infrioinfotech.qzz.io/contact"
+        ogTitle="Contact Infrio Infotech | Start Your Project"
+        ogDescription="Reach out to Infrio Infotech for professional IT services."
+        ogImage="https://infrioinfotech.qzz.io/infrio/Logo.png"
+        ogUrl="https://infrioinfotech.qzz.io/contact"
+        robots="index,follow"
+      />
       <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div

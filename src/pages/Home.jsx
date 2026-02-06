@@ -6,10 +6,48 @@ import { services, bestWorkProjects, testimonials, whyChooseUs } from '../utils/
 import ServiceCard from '../components/ServiceCard';
 import PortfolioCard from '../components/PortfolioCard';
 import * as Icons from 'lucide-react';
+import SEO from '../components/SEO';
 
 const Home = () => {
   return (
     <div className="overflow-hidden bg-brand-white">
+      <SEO
+        title="Infrio Infotech | IT Services, Web Development & Software Solutions"
+        description="Infrio Infotech provides professional IT services, web development, software solutions and digital systems for businesses and startups."
+        canonical="https://infrioinfotech.qzz.io/"
+        ogTitle="Infrio Infotech | IT Services, Web Development & Software Solutions"
+        ogDescription="Professional IT services, web development and software solutions by Infrio Infotech."
+        ogImage="https://infrioinfotech.qzz.io/infrio/Logo.png"
+        ogUrl="https://infrioinfotech.qzz.io/"
+        robots="index,follow"
+        jsonLd={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Infrio Infotech',
+            url: 'https://infrioinfotech.qzz.io',
+            logo: 'https://infrioinfotech.qzz.io/infrio/Logo.png',
+            sameAs: [],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Infrio Infotech',
+            url: 'https://infrioinfotech.qzz.io',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: 'https://infrioinfotech.qzz.io/?q={search_term_string}',
+              'query-input': 'required name=search_term_string',
+            },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'ProfessionalService',
+            name: 'Infrio Infotech',
+            url: 'https://infrioinfotech.qzz.io',
+          },
+        ]}
+      />
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center bg-brand-white">
         <div className="absolute inset-0">
@@ -35,12 +73,7 @@ const Home = () => {
               </motion.div>
 
               <h1 className="text-5xl md:text-7xl font-black text-brand-black leading-tight mb-6">
-                Passionate
-                <span className="text-brand-red"> IT</span>
-                <br />
-                & Software
-                <br />
-                <span className="text-brand-black/90">Solutions</span>
+                Infrio Infotech – IT Services & Software Solutions
               </h1>
 
               <p className="text-lg text-brand-gray mb-8 max-w-lg leading-relaxed">

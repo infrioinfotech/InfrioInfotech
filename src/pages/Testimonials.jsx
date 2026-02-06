@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote, X, Upload, Loader2, User, Plus } from 'lucide-react';
 import axios from 'axios';
 import avatarPlaceholder from '../assets/avatar-placeholder.png';
+import SEO from '../components/SEO';
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
@@ -142,6 +143,16 @@ const Testimonials = () => {
 
   return (
     <div className="bg-brand-white min-h-screen">
+      <SEO
+        title="Client Reviews | Infrio Infotech"
+        description="Client testimonials and reviews for Infrio Infotech. See what our customers say about our IT services and software solutions."
+        canonical="https://infrioinfotech.qzz.io/testimonials"
+        ogTitle="Client Reviews | Infrio Infotech"
+        ogDescription="Testimonials about Infrio Infotech's services and solutions."
+        ogImage="https://infrioinfotech.qzz.io/infrio/Logo.png"
+        ogUrl="https://infrioinfotech.qzz.io/testimonials"
+        robots="index,follow"
+      />
       {/* Hero Section */}
       <section className="py-20 relative overflow-hidden bg-brand-offwhite">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">

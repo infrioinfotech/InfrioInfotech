@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Target, Eye, Heart } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const About = () => {
   const values = [
@@ -12,6 +13,16 @@ const About = () => {
 
   return (
     <div className="bg-brand-white pb-24">
+      <SEO
+        title="About Infrio Infotech | Our Company & Mission"
+        description="Learn about Infrio Infotech, our mission and how we build professional IT services and software solutions for businesses and startups."
+        canonical="https://infrioinfotech.qzz.io/about"
+        ogTitle="About Infrio Infotech | Our Company & Mission"
+        ogDescription="About Infrio Infotech: our mission and commitment to quality IT services."
+        ogImage="https://infrioinfotech.qzz.io/infrio/Logo.png"
+        ogUrl="https://infrioinfotech.qzz.io/about"
+        robots="index,follow"
+      />
       {/* Hero */}
       <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

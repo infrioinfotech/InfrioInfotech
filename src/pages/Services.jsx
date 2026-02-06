@@ -3,10 +3,21 @@ import { motion } from 'framer-motion';
 import { services } from '../utils/data';
 import ServiceCard from '../components/ServiceCard';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Services = () => {
   return (
     <div className="bg-brand-white pb-24">
+      <SEO
+        title="IT Services by Infrio Infotech | Web, Software & Digital Solutions"
+        description="Explore IT services from Infrio Infotech including web development, software solutions and digital systems tailored for your business."
+        canonical="https://infrioinfotech.qzz.io/services"
+        ogTitle="IT Services by Infrio Infotech | Web, Software & Digital Solutions"
+        ogDescription="Professional IT services by Infrio Infotech for web and software."
+        ogImage="https://infrioinfotech.qzz.io/infrio/Logo.png"
+        ogUrl="https://infrioinfotech.qzz.io/services"
+        robots="index,follow"
+      />
       {/* Hero */}
       <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

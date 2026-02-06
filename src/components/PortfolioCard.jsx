@@ -14,14 +14,17 @@ const techIcons = {
 
 const PortfolioCard = ({ title, category, description, image, technologies, index, className = "" }) => {
   return (
-    <div
+    <article
       className={`group overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ease-out lg:flex lg:h-48 ${className}`}
     >
       <div className="relative overflow-hidden lg:w-2/5 lg:h-full">
         <div className="aspect-video w-full lg:h-full lg:aspect-auto">
           <img
             src={image}
-            alt={title}
+            alt={`${title} – Infrio Infotech`}
+            loading="lazy"
+            width="800"
+            height="450"
             className="w-full h-full object-cover transform group-hover:scale-[1.03] transition-all duration-300 ease-out"
           />
         </div>
@@ -56,7 +59,7 @@ const PortfolioCard = ({ title, category, description, image, technologies, inde
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

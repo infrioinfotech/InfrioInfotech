@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowLeft, Package, Send } from 'lucide-react';
 import { pricingPackages } from '../utils/data';
-import { submitOrderRequest } from '../services/api';
+import { submitOrderRequest } from '../utils/services/api';
 
 const Order = () => {
   const location = useLocation();

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { allProjects } from '../utils/data';
 import PortfolioCard from '../components/PortfolioCard';
+import SEO from '../components/SEO';
 
 const Portfolio = () => {
   const categories = ['All', 'Web Development', 'Mobile Apps', 'E-commerce', 'Digital Marketing'];
@@ -13,6 +14,16 @@ const Portfolio = () => {
 
   return (
     <div className="bg-brand-white pb-24">
+      <SEO
+        title="Projects by Infrio Infotech | Best Work & Case Studies"
+        description="See the projects by Infrio Infotech including our best work and case studies across web, software and digital solutions."
+        canonical="https://infrioinfotech.qzz.io/portfolio"
+        ogTitle="Projects by Infrio Infotech | Best Work & Case Studies"
+        ogDescription="Portfolio of Infrio Infotech: best work and case studies."
+        ogImage="https://infrioinfotech.qzz.io/infrio/Logo.png"
+        ogUrl="https://infrioinfotech.qzz.io/portfolio"
+        robots="index,follow"
+      />
       {/* Hero */}
       <section className="py-24 relative overflow-hidden  ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
