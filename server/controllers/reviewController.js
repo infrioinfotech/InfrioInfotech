@@ -105,16 +105,17 @@ export const submitReview = async (req, res) => {
     // 2. Append row to Google Sheet (Optional but good to have)
     try {
       console.log('Appending to Google Sheets...');
+      const rowData = [
+        new Date().toISOString(), // createdAt
+        cleanMessage,             // message
+        cleanName,                // name
+        photoUrl || '',           // photoUrl
+        ratingNum,                // rating
+        'Client'                  // role
+      ];
+      console.log('Appending review row to Google Sheet', rowData);
       // Give Google Sheets 4 seconds max, otherwise proceed
-      await withTimeout(appendToSheet('Reviews', [
-        [
-          cleanName,
-          ratingNum,
-          cleanMessage,
-          photoUrl || '',
-          new Date().toISOString()
-        ]
-      ]), 4000);
+      await withTimeout(appendToSheet('Reviews', rowData), 4000);
       console.log('Google Sheets append success');
     } catch (sheetError) {
       console.error('Warning: Google Sheet append failed or timed out:', sheetError.message);

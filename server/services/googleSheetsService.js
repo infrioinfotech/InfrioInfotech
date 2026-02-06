@@ -65,7 +65,7 @@ const createSheet = async (sheets, spreadsheetId, title) => {
   }
 };
 
-export const appendToSheet = async (target, values) => {
+export const appendToSheet = async (target, row) => {
   try {
     const auth = getAuth();
     const sheets = google.sheets({ version: 'v4', auth });
@@ -75,56 +75,24 @@ export const appendToSheet = async (target, values) => {
       throw new Error('GOOGLE_SHEET_ID is missing');
     }
 
-    let sheetName;
-    // Map target 'Contacts' to first sheet (index 0) and 'Orders' to second sheet (index 1)
-    if (target === 'Contacts') {
-      try {
-        sheetName = await getSheetTitleByIndex(sheets, spreadsheetId, 0);
-      } catch (e) {
-        // Fallback: try to use target name if index 0 fails (unlikely for valid spreadsheet)
-        sheetName = target;
-      }
-    } else if (target === 'Orders') {
-      try {
-        sheetName = await getSheetTitleByIndex(sheets, spreadsheetId, 1);
-      } catch (e) {
-        // Index 1 missing. Create 'Orders' sheet.
-        console.log('Second sheet not found, creating "Orders" sheet...');
-        // Note: If 'Orders' already exists but is not index 1, this might fail or create duplicate?
-        // Sheets API prevents duplicate names.
-        // We will try to create it. If it fails, maybe it exists?
-        // If it exists, we can use the name directly.
-        try {
-            sheetName = await createSheet(sheets, spreadsheetId, 'Orders');
-        } catch (createError) {
-             // If creation fails (e.g. name exists), use 'Orders'
-             sheetName = 'Orders';
-        }
-      }
-    } else if (target === 'Reviews') {
-      try {
-        sheetName = await getSheetTitleByIndex(sheets, spreadsheetId, 2);
-      } catch (e) {
-        // Index 2 missing. Create 'Reviews' sheet.
-        console.log('Third sheet not found, creating "Reviews" sheet...');
-        try {
-            sheetName = await createSheet(sheets, spreadsheetId, 'Reviews');
-        } catch (createError) {
-             sheetName = 'Reviews';
-        }
-      }
-    } else {
-      sheetName = target;
-    }
+    // Use explicit sheet names; for Reviews, rely on exact title "Reviews"
+    const sheetName = target;
 
-    const response = await sheets.spreadsheets.values.append({
+    // Choose append range and options
+    const range = target === 'Reviews' ? 'Reviews!A:F' : `${sheetName}!A:A`;
+
+    const request = {
       spreadsheetId,
-      range: `${sheetName}!A:A`,
+      range,
       valueInputOption: 'USER_ENTERED',
+      insertDataOption: 'INSERT_ROWS',
       requestBody: {
-        values: [values],
+        values: [row],
       },
-    });
+    };
+
+    console.log('Appending row to Google Sheet', { target, range, row });
+    const response = await sheets.spreadsheets.values.append(request);
 
     return response.data;
   } catch (error) {
