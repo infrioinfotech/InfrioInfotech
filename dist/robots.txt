@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://infrioinfotech.qzz.io/sitemap.xml
