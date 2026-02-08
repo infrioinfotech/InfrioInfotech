@@ -28,44 +28,8 @@ const Contact = () => {
     setStatus({ submitting: true, success: false, error: null });
 
     try {
-      // 1. Submit to Firestore (existing logic)
+      // Submit to backend API only
       await submitContactForm(formData);
-
-      // 2. Prepare EmailJS parameters
-      const templateParamsCompany = {
-        user_name: formData.name,
-        user_email: formData.email,
-        subject: `New Contact Request – ${formData.service}`,
-        message: formData.message,
-        service: formData.service,
-        from_email: 'contact@infrioinfotech.qzz.io',
-      };
-      const templateParamsUser = {
-        user_name: formData.name,
-        user_email: formData.email,
-        subject: 'We received your request',
-        message: formData.message,
-        service: formData.service,
-        from_email: 'contact@infrioinfotech.qzz.io',
-      };
-
-      // 3. Send email to company
-      if (window.emailjs) {
-        await window.emailjs.send(
-          'service_lczqxtw',
-          'template_lj8kou9',
-          templateParamsCompany
-        );
-
-        // 4. Send thank you email to user
-        await window.emailjs.send(
-          'service_lczqxtw',
-          'template_l3bb6or',
-          templateParamsUser
-        );
-      } else {
-        console.warn('EmailJS not loaded');
-      }
 
       setStatus({ submitting: false, success: true, error: null });
       setFormData({ name: '', email: '', phone: '', service: 'Web Development', message: '' });
