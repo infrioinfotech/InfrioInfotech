@@ -1,4 +1,3 @@
-import { appendToSheet } from '../services/googleSheetsService.js';
 import { adminDb as db } from '../services/firebaseAdmin.js';
 
 export const submitOrder = async (req, res) => {
@@ -15,18 +14,6 @@ export const submitOrder = async (req, res) => {
       contactInfo,
       submittedAt: timestamp
     });
-
-    // 2. Append to Google Sheets
-    await appendToSheet('Orders', [
-      timestamp,
-      pageType,
-      packageDetails?.name || '',
-      packageDetails?.price || '',
-      projectDescription || '',
-      contactInfo?.name || '',
-      contactInfo?.email || '',
-      contactInfo?.phone || ''
-    ]);
 
     res.status(200).json({ 
       success: true, 

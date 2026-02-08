@@ -1,6 +1,5 @@
 import { adminDb as db } from '../services/firebaseAdmin.js';
 import { FieldValue } from 'firebase-admin/firestore';
-import { appendToSheet } from '../services/googleSheetsService.js';
 
 export const getReviews = async (req, res) => {
   try {
@@ -41,14 +40,6 @@ export const getReviews = async (req, res) => {
     console.error('SERVER ERROR in getReviews:', error);
     res.status(500).json({ error: 'Failed to fetch reviews', details: error.message });
   }
-};
-
-// Helper to timeout a promise
-const withTimeout = (promise, ms) => {
-  return Promise.race([
-    promise,
-    new Promise((_, reject) => setTimeout(() => reject(new Error('Operation timed out')), ms))
-  ]);
 };
 
 export const submitReview = async (req, res) => {
@@ -101,26 +92,6 @@ export const submitReview = async (req, res) => {
       photoUrl: photoUrl || null,
       createdAt: new Date().toISOString()
     };
-
-    // 2. Append row to Google Sheet (Optional but good to have)
-    try {
-      console.log('Appending to Google Sheets...');
-      const rowData = [
-        new Date().toISOString(), // createdAt
-        cleanMessage,             // message
-        cleanName,                // name
-        photoUrl || '',           // photoUrl
-        ratingNum,                // rating
-        'Client'                  // role
-      ];
-      console.log('Appending review row to Google Sheet', rowData);
-      // Give Google Sheets 4 seconds max, otherwise proceed
-      await withTimeout(appendToSheet('Reviews', rowData), 4000);
-      console.log('Google Sheets append success');
-    } catch (sheetError) {
-      console.error('Warning: Google Sheet append failed or timed out:', sheetError.message);
-      // Do not fail the request if sheet fails
-    }
 
     res.status(201).json({ success: true, review: newReview });
 
