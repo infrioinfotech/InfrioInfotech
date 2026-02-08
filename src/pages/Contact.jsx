@@ -32,12 +32,21 @@ const Contact = () => {
       await submitContactForm(formData);
 
       // 2. Prepare EmailJS parameters
-      const templateParams = {
-        full_name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        service: formData.service,
+      const templateParamsCompany = {
+        user_name: formData.name,
+        user_email: formData.email,
+        subject: `New Contact Request – ${formData.service}`,
         message: formData.message,
+        service: formData.service,
+        from_email: 'contact@infrioinfotech.qzz.io',
+      };
+      const templateParamsUser = {
+        user_name: formData.name,
+        user_email: formData.email,
+        subject: 'We received your request',
+        message: formData.message,
+        service: formData.service,
+        from_email: 'contact@infrioinfotech.qzz.io',
       };
 
       // 3. Send email to company
@@ -45,14 +54,14 @@ const Contact = () => {
         await window.emailjs.send(
           'service_lczqxtw',
           'template_lj8kou9',
-          templateParams
+          templateParamsCompany
         );
 
         // 4. Send thank you email to user
         await window.emailjs.send(
           'service_lczqxtw',
           'template_l3bb6or',
-          templateParams
+          templateParamsUser
         );
       } else {
         console.warn('EmailJS not loaded');

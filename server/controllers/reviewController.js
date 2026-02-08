@@ -1,5 +1,6 @@
 import { adminDb as db } from '../services/firebaseAdmin.js';
 import { FieldValue } from 'firebase-admin/firestore';
+import { sendUserAutoReply, sendInternalNotification } from '../services/mailer.js';
 
 export const getReviews = async (req, res) => {
   try {
@@ -94,6 +95,25 @@ export const submitReview = async (req, res) => {
     };
 
     res.status(201).json({ success: true, review: newReview });
+
+    // Fire-and-forget emails
+    const summary = {
+      Name: cleanName,
+      Rating: ratingNum,
+      Message: cleanMessage,
+      PhotoUrl: photoUrl || '',
+      SubmittedAt: new Date().toISOString(),
+    };
+    sendUserAutoReply({
+      toEmail: '', // optional if you collect reviewer email
+      toName: cleanName,
+      subject: 'Thank you for your review',
+      summary,
+    });
+    sendInternalNotification({
+      subject: 'New Review Submitted',
+      summary,
+    });
 
   } catch (error) {
     console.error("SERVER ERROR in submitReview:", error);
