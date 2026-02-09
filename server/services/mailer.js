@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const fromAddress = `"${EMAIL_FROM_NAME || 'Infrio Infotech'}" <${EMAIL_USER}>`;
+const fromAddress = `"Infrio Infotech – Website Enquiry" <${EMAIL_USER}>`;
 const brandUrl = 'https://infrioinfotech.qzz.io';
 const brandLogo = `${brandUrl}/infrio/Logo.png`;
 const brandRed = '#E10600';
