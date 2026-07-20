@@ -1,0 +1,33 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": null,
+  "rewrites": [
+    {
+      "source": "/about-us",
+      "destination": "/about-us/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact-us/index.html"
+    },
+    {
+      "source": "/pricing-plan",
+      "destination": "/pricing-plan/index.html"
+    },
+    {
+      "source": "/project",
+      "destination": "/project/index.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services/index.html"
+    }
+  ]
+}
