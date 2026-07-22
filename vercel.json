@@ -7,27 +7,27 @@
   "rewrites": [
     {
       "source": "/about-us",
-      "destination": "/about-us/index.html"
+      "destination": "/src/pages/about.html"
     },
     {
       "source": "/blog",
-      "destination": "/blog/index.html"
+      "destination": "/src/pages/blog.html"
     },
     {
       "source": "/contact-us",
-      "destination": "/contact-us/index.html"
+      "destination": "/src/pages/contact-us.html"
     },
     {
       "source": "/pricing-plan",
-      "destination": "/pricing-plan/index.html"
+      "destination": "/src/pages/pricing.html"
     },
     {
       "source": "/project",
-      "destination": "/project/index.html"
+      "destination": "/src/pages/project.html"
     },
     {
       "source": "/services",
-      "destination": "/services/index.html"
+      "destination": "/src/pages/services.html"
     }
   ]
 }
