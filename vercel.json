@@ -28,6 +28,22 @@
     {
       "source": "/services",
       "destination": "/src/pages/services.html"
+    },
+    {
+      "source": "/services/website-design",
+      "destination": "/src/pages/services/website-design.html"
+    },
+    {
+      "source": "/services/software-solutions",
+      "destination": "/src/pages/services/software-solutions.html"
+    },
+    {
+      "source": "/services/app-development",
+      "destination": "/src/pages/services/app-development.html"
+    },
+    {
+      "source": "/services/ui-ux-design",
+      "destination": "/src/pages/services/ui-ux-design.html"
     }
   ]
 }
