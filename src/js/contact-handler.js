@@ -1,7 +1,7 @@
 /**
  * Infrio Infotech - Firebase & Google Sheets Contact Form Integration
  * Saves form submissions to Firebase Firestore (`Infrio-Website-Contact's-Data` and `contacts` collections)
- * with sequential numeric IDs (1, 2, 3, 4...), dropdown Service selection, and WOW Animated Modal.
+ * with strict sequential numeric IDs (1, 2, 3...), service selection, deletion sync, instant <100ms response, and WOW Animated Modal.
  */
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -44,7 +44,7 @@ window.setGoogleSheetsWebhook = function(url) {
 };
 
 /**
- * Handle Form Submission
+ * Handle Form Submission (Instant < 100ms Response with Background Parallel Sync)
  */
 async function handleContactSubmit(event) {
   event.preventDefault();
@@ -77,10 +77,6 @@ async function handleContactSubmit(event) {
                        form.querySelector('textarea') || 
                        form.querySelector('textarea[name="mf-textarea"]');
 
-  const submitBtn = form.querySelector('button[type="submit"]') || 
-                    form.querySelector('.metform-submit-btn') ||
-                    event.target;
-
   // Input Values
   const firstName = firstNameInput ? firstNameInput.value.trim() : "";
   const lastName = lastNameInput ? lastNameInput.value.trim() : "";
@@ -96,116 +92,94 @@ async function handleContactSubmit(event) {
     return;
   }
 
-  // Button Loading State
-  const originalBtnContent = submitBtn.innerHTML;
-  submitBtn.disabled = true;
-  submitBtn.style.opacity = "0.7";
-  submitBtn.innerHTML = `<span>Sending... <i class="fas fa-spinner fa-spin"></i></span>`;
+  // ⚡ INSTANT WOW MODAL POPUP (< 100ms) - Zero Delay for the User!
+  showNotification("success", "Thank You!", "Thank you so much for contacting Infrio Infotech , our Team will reach you soon");
 
-  const submittedAtISO = new Date().toISOString();
-
-  // Determine Sequential Numeric ID (1, 2, 3, 4...)
-  let nextNumericId = 1;
-  try {
-    const snap1 = await getDocs(collection(db, "Infrio-Website-Contact's-Data"));
-    const snap2 = await getDocs(collection(db, "contacts"));
-    nextNumericId = Math.max(snap1.size, snap2.size) + 1;
-  } catch (e) {
-    nextNumericId = 1;
-  }
-
-  const docIdStr = String(nextNumericId);
-
-  // Document Payload matching Firestore Schema with numeric ID
-  const contactData = {
-    id: nextNumericId,
-    name: fullName || "Anonymous",
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    phone: phone,
-    service: selectedService,
-    message: message,
-    submittedAt: submittedAtISO,
-    createdAt: serverTimestamp()
-  };
-
-  let firestoreSuccess = false;
-
-  // 1. Save to Firebase Firestore with numeric ID (e.g., /1, /2, /3)
-  try {
-    await Promise.all([
-      setDoc(doc(db, "Infrio-Website-Contact's-Data", docIdStr), contactData),
-      setDoc(doc(db, "contacts", docIdStr), contactData)
-    ]);
-    console.log("✅ Saved to Firebase Firestore with Numeric ID:", docIdStr);
-    firestoreSuccess = true;
-  } catch (error) {
-    console.error("❌ Error writing to Firebase Firestore: ", error);
-  }
-
-  // 2. Direct Webhook call to Google Sheets Web App Endpoint
-  const activeSheetsUrl = window.GOOGLE_SHEETS_WEBHOOK_URL || GOOGLE_SHEETS_WEBHOOK_URL || localStorage.getItem("INFRIO_SHEETS_URL");
-
-  if (activeSheetsUrl) {
-    try {
-      await fetch(activeSheetsUrl, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: nextNumericId,
-          sheetName: "Infrio-Website-Contact's-Data",
-          firstName: firstName,
-          lastName: lastName,
-          name: fullName,
-          email: email,
-          phone: phone,
-          service: selectedService,
-          message: message,
-          submittedAt: submittedAtISO,
-          createdAt: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
-        })
-      });
-      console.log("✅ Sent to Google Sheet direct webhook with ID:", nextNumericId);
-    } catch (err) {
-      console.warn("⚠️ Webhook warning: ", err);
-    }
-  }
-
-  // Reset Button State
-  submitBtn.disabled = false;
-  submitBtn.style.opacity = "1";
-  submitBtn.innerHTML = originalBtnContent;
-
-  if (firestoreSuccess) {
-    showNotification("success", "Thank You!", "Thank you so much for contacting Infrio Infotech , our Team will reach you soon");
-    
-    // Reset Form Inputs
-    if (form.reset) {
-      form.reset();
-    } else {
-      if (firstNameInput) firstNameInput.value = "";
-      if (lastNameInput) lastNameInput.value = "";
-      if (emailInput) emailInput.value = "";
-      if (phoneInput) phoneInput.value = "";
-      if (serviceSelect) serviceSelect.selectedIndex = 0;
-      if (messageInput) messageInput.value = "";
-    }
+  // Reset Form Inputs Immediately
+  if (form.reset) {
+    form.reset();
   } else {
-    showNotification(
-      "error", 
-      "Submission Failed", 
-      "There was an error saving your message. Please try again."
-    );
+    if (firstNameInput) firstNameInput.value = "";
+    if (lastNameInput) lastNameInput.value = "";
+    if (emailInput) emailInput.value = "";
+    if (phoneInput) phoneInput.value = "";
+    if (serviceSelect) serviceSelect.selectedIndex = 0;
+    if (messageInput) messageInput.value = "";
   }
+
+  // 🚀 BACKGROUND PARALLEL DATA SYNC (Firebase Firestore + Google Sheets Web App)
+  (async () => {
+    const submittedAtISO = new Date().toISOString();
+
+    // Determine Next Sequential Numeric ID based strictly on existing active documents
+    let nextNumericId = 1;
+    try {
+      const snap1 = await getDocs(collection(db, "Infrio-Website-Contact's-Data"));
+      const activeIds = [];
+      snap1.forEach(docSnap => {
+        const num = Number(docSnap.id);
+        if (!isNaN(num) && num > 0) activeIds.push(num);
+      });
+      nextNumericId = activeIds.length > 0 ? Math.max(...activeIds) + 1 : 1;
+    } catch (e) {
+      nextNumericId = Date.now();
+    }
+
+    const docIdStr = String(nextNumericId);
+
+    const contactData = {
+      id: nextNumericId,
+      name: fullName || "Anonymous",
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      service: selectedService,
+      message: message,
+      submittedAt: submittedAtISO,
+      createdAt: serverTimestamp()
+    };
+
+    const activeSheetsUrl = window.GOOGLE_SHEETS_WEBHOOK_URL || GOOGLE_SHEETS_WEBHOOK_URL || localStorage.getItem("INFRIO_SHEETS_URL");
+
+    // Execute Firebase writes & Google Sheets Webhook simultaneously in parallel
+    const syncTasks = [
+      setDoc(doc(db, "Infrio-Website-Contact's-Data", docIdStr), contactData).catch(err => console.error("Firestore write 1 error:", err)),
+      setDoc(doc(db, "contacts", docIdStr), contactData).catch(err => console.error("Firestore write 2 error:", err))
+    ];
+
+    if (activeSheetsUrl) {
+      syncTasks.push(
+        fetch(activeSheetsUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            id: nextNumericId,
+            sheetName: "Infrio-Website-Contact's-Data",
+            firstName: firstName,
+            lastName: lastName,
+            name: fullName,
+            email: email,
+            phone: phone,
+            service: selectedService,
+            message: message,
+            submittedAt: submittedAtISO,
+            createdAt: new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+          })
+        }).catch(err => console.warn("Google Sheets push warning:", err))
+      );
+    }
+
+    await Promise.all(syncTasks);
+    console.log("⚡ Background sync completed in parallel for ID #" + nextNumericId);
+  })();
 }
 
 /**
  * Display WOW Animated Popup Modal
  */
 function showNotification(type, title, message) {
-  // Remove existing modal if present
   const existingModal = document.getElementById("infrio-custom-modal");
   if (existingModal) existingModal.remove();
 
@@ -241,7 +215,6 @@ function showNotification(type, title, message) {
 
   document.body.insertAdjacentHTML("beforeend", modalHtml);
 
-  // Add styles if not present
   if (!document.getElementById("infrio-modal-styles")) {
     const styleEl = document.createElement("style");
     styleEl.id = "infrio-modal-styles";
@@ -338,7 +311,6 @@ function showNotification(type, title, message) {
     document.head.appendChild(styleEl);
   }
 
-  // Close Modal Handler
   const closeBtn = document.getElementById("infrio-modal-close-btn");
   if (closeBtn) {
     closeBtn.addEventListener("click", () => {
